@@ -1,14 +1,14 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { FileType } from "../../../types";
+import { FileType } from "../../types";
 import { Button } from "../ui/button";
 import { DataTable } from "./Table";
 import { columns } from "./columns";
 import { useEffect, useState } from "react";
 import { collection, orderBy, query } from "firebase/firestore";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { db } from "../../../firebase";
+import { db } from "../../firebase";
 import { Skeleton } from "../ui/skeleton";
 
 function TableWrapper({ skeletonFiles }: { skeletonFiles: FileType[] }) {

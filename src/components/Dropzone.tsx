@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { useState } from "react";
 import DropzoneComponent from "react-dropzone";
-import { db, storage } from "../../firebase";
+import { db, storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 function Dropzone() {

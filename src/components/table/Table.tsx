@@ -15,12 +15,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { FileType, GlobalContextType } from "../../../types";
+import { FileType, GlobalContextType } from "../../types";
 import { Button } from "../ui/button";
 import { PencilIcon, TrashIcon } from "lucide-react";
 import { useContext } from "react";
 import { GlobalContext } from "@/app/Providers";
 import DeleteModal from "../DeleteModal";
+import RenameModal from "../RenameModal";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -54,6 +55,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className="rounded-md border">
       <DeleteModal />
+      <RenameModal />
 
       <Table>
         <TableHeader>

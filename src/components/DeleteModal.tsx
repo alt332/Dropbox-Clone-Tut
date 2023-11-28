@@ -13,10 +13,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useContext } from "react";
-import { GlobalContextType } from "../../types";
+import { GlobalContextType } from "../types";
 import { useUser } from "@clerk/nextjs";
 import { deleteObject, ref } from "firebase/storage";
-import { db, storage } from "../../firebase";
+import { db, storage } from "../firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 
 export default function DialogCloseButton() {
@@ -69,6 +69,7 @@ export default function DialogCloseButton() {
             <Button
               type="submit"
               size="sm"
+              variant={"destructive"}
               className="px-3 flex-1"
               onClick={deleteFile}
             >
