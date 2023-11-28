@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { UserButton } from "@clerk/nextjs";
 import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -38,7 +36,7 @@ export default function Home() {
         </div>
       </div>
 
-      <p className="text-center font-bold text-xl pt-5">DIsclaimer</p>
+      <p className="text-center font-bold text-xl pt-5">Disclaimer</p>
       <p className="text-center font-light p-2">
         This site is made for educational purposes only. We do not own or
         affiliate with Dropbox or/and any of its subsidiaries in any form.
