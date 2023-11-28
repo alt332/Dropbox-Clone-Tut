@@ -15,9 +15,11 @@ import {
 import { Input } from "./ui/input";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
+import { useToast } from "./ui/use-toast";
 
 function RenameModal() {
   const { user } = useUser();
+  const { toast } = useToast();
   const [input, setInput] = useState("");
   const { fileId, fileName, setIsRenameModalOpen, isRenameModalOpen } =
     useContext(GlobalContext) as GlobalContextType;
@@ -26,11 +28,21 @@ function RenameModal() {
     if (!user || !fileId) return;
 
     try {
+      toast({ description: "Renaming..." });
+
       await updateDoc(doc(db, "users", user.id, "files", fileId), {
         fileName: input,
       });
+
+      toast({
+        description: "Renamed succssfully!",
+      });
     } catch (error) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        description: "Something went wrong!",
+      });
     }
 
     setInput("");

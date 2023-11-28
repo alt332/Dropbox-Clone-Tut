@@ -4,37 +4,47 @@ import { GlobalContext } from "@/app/Providers";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
-import { useContext } from "react";
-import { GlobalContextType } from "../types";
 import { useUser } from "@clerk/nextjs";
-import { deleteObject, ref } from "firebase/storage";
-import { db, storage } from "../firebase";
 import { deleteDoc, doc } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
+import { useContext } from "react";
+import { db, storage } from "../firebase";
+import { GlobalContextType } from "../types";
+import { useToast } from "./ui/use-toast";
 
 export default function DialogCloseButton() {
   const { fileId, isDeleteModalOpen, setIsDeleteModalOpen } = useContext(
     GlobalContext
   ) as GlobalContextType;
   const { user } = useUser();
+  const { toast } = useToast();
 
   const deleteFile = async () => {
     if (!user || !fileId) return;
+
+    toast({ description: "Deleting..." });
 
     const fileRef = ref(storage, `users/${user.id}/files/${fileId}`);
 
     try {
       await deleteObject(fileRef);
       await deleteDoc(doc(db, "users", user.id, "files", fileId));
+
+      toast({
+        description: "Deleted succssfully!",
+      });
     } catch (error) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        description: "Something went wrong!",
+      });
     }
 
     setIsDeleteModalOpen(false);
